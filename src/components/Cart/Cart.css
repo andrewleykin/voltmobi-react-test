@@ -1,0 +1,12 @@
+.cart-page__actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-page__wrap {
+  display: flex;
+}
+
+.cart-page__content {
+  flex: auto;
+}

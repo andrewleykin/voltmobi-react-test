@@ -1,0 +1,29 @@
+.ui-kit-input + .ui-kit-input {
+  margin-top: 10px;
+}
+
+.ui-kit-input .error {
+  color: red;
+}
+
+.ui-kit-input input {
+  width: 100%;
+  font-size: 15px;
+  height: 44px;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #babbbf;
+  padding: 0 16px;
+  color: #202020;
+  outline: none;
+}
+
+.ui-kit-input label {
+  font-size: 15px;
+  color: #202020;
+  outline: none;
+  display: inline-block;
+  margin-bottom: 10px;
+  cursor: pointer;
+}

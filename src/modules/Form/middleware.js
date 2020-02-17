@@ -1,21 +1,23 @@
-import { fetchRequest, fetchSuccess, changeField, addField } from "./actions";
-import { save, load } from "../localstorage";
+import {
+  fetchRequest,
+  fetchSuccess,
+  changeField as changeFieldActions,
+  addField as addFieldActions
+} from "./actions";
+import { save, load, FORM_LOCALSTORAGE_KEY } from "../localstorage";
 import { getForm } from "./selectors";
 
-export const formMiddleware = store => next => action => {
-  const result = next(action);
-  const formFields = getForm(store.getState());
-  switch (action.type) {
-    case fetchRequest.toString():
-      store.dispatch(fetchSuccess(load("test-form") || []));
-      break;
-    case changeField.toString():
-    case addField.toString():
-      save("test-form", formFields);
-      break;
-    default:
-      return;
-  }
+export const fetchForm = () => dispatch => {
+  dispatch(fetchRequest());
+  dispatch(fetchSuccess(load(FORM_LOCALSTORAGE_KEY) || []));
+};
 
-  return result;
+export const changeField = payload => (dispatch, getState) => {
+  dispatch(changeFieldActions(payload));
+  save(FORM_LOCALSTORAGE_KEY, getForm(getState()));
+};
+
+export const addField = payload => (dispatch, getState) => {
+  dispatch(addFieldActions(payload));
+  save(FORM_LOCALSTORAGE_KEY, getForm(getState()));
 };

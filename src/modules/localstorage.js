@@ -17,4 +17,7 @@ function clearLocal(localStorageKey) {
   window.localStorage.removeItem(localStorageKey);
 }
 
-export { load, save, clearLocal };
+const CART_LOCALSTORAGE_KEY = "cart";
+const FORM_LOCALSTORAGE_KEY = "test-form";
+
+export { load, save, clearLocal, CART_LOCALSTORAGE_KEY, FORM_LOCALSTORAGE_KEY };

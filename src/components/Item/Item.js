@@ -1,56 +1,27 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getItemById } from "../../modules/Items";
-import { getCategories } from "../../modules/Categories";
+import React from "react";
 import ActionButton from "../ActionButton";
-import EmptyPage from "../EmptyPage";
+import ItemWrap from "./ItemWrap";
 
-class Item extends Component {
-  getCategoryName = id => {
-    const { categories } = this.props;
+const Item = ({ categories, itemInfo }) => {
+  const getCategoryName = id => {
     return categories.length > 0
       ? categories.find(item => item.id === id).title
       : "";
   };
 
-  render() {
-    const { itemInfo } = this.props;
-    return (
-      <div className="item-page">
-        <div className="container">
-          {itemInfo ? (
-            this.renderItemInfo()
-          ) : (
-            <EmptyPage>Такого товара нету</EmptyPage>
-          )}
-        </div>
-      </div>
-    );
-  }
+  return (
+    <ItemWrap>
+      <h1>{itemInfo.name}</h1>
+      <p>{itemInfo.descr}</p>
+      <h3>Цена: {itemInfo.costCurrency}</h3>
+      <ul>
+        {itemInfo.categories.map(cat => (
+          <li key={cat}>{getCategoryName(cat)}</li>
+        ))}
+      </ul>
+      <ActionButton item={itemInfo} />
+    </ItemWrap>
+  );
+};
 
-  renderItemInfo = () => {
-    const { itemInfo } = this.props;
-    const { name, descr, costCurrency, categories } = itemInfo;
-    return (
-      <>
-        <h1>{name}</h1>
-        <p>{descr}</p>
-        <h3>Цена: {costCurrency}</h3>
-        <ul>
-          {categories.map(cat => (
-            <li key={cat}>{this.getCategoryName(cat)}</li>
-          ))}
-        </ul>
-        <ActionButton item={itemInfo} />
-      </>
-    );
-  };
-}
-
-const mapStateToProps = (state, ownProps) => ({
-  itemInfo: getItemById(state, ownProps.match.params.id),
-  categories: getCategories(state)
-});
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Item);
+export default Item;

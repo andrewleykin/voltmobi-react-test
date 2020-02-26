@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ItemList from "../ItemList";
 import Sidebar from "../Sidebar";
 import CartForm from "./CartForm";
@@ -24,6 +25,19 @@ const Cart = ({ clearCart, cart, cartLength, cartTotalSum }) => {
       </div>
     </CartWrap>
   );
+};
+
+Cart.propTypes = {
+  cart: PropTypes.array,
+  cartLength: PropTypes.number,
+  cartTotalSum: PropTypes.string,
+  clearCart: PropTypes.func.isRequired
+};
+
+Cart.defaultProps = {
+  cart: [],
+  cartLength: 0,
+  cartTotalSum: ""
 };
 
 export default Cart;

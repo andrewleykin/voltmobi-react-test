@@ -21,18 +21,16 @@ const mapDispatchToProps = { clearCart, fetchCart };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
+const withLifecycle = lifecycle({
+  componentDidMount() {
+    const { isLoaded, fetchCart } = this.props;
+    if (!isLoaded) fetchCart();
+  }
+});
+
 const withBranch = compose(
   branch(({ cartLength }) => cartLength === 0, renderComponent(CartEmpty))
 );
-
-const withLifecycle = lifecycle({
-  componentDidMount() {
-    const { cart, fetchCart } = this.props;
-    if (!cart.length) {
-      fetchCart();
-    }
-  }
-});
 
 const enhance = compose(withConnect, withLifecycle, withBranch);
 

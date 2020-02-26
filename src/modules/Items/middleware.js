@@ -3,5 +3,5 @@ import items from "../../data/items.json";
 
 export const fetchItems = () => dispatch => {
   dispatch(fetchRequest());
-  setTimeout(() => dispatch(fetchSuccess(items)), 0);
+  dispatch(fetchSuccess(items));
 };

@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
-import { handleActions } from "redux-actions";
+import { handleActions, ReduxCompatibleReducer } from "redux-actions";
 import { fetchRequest, fetchSuccess } from "./actions";
 import { currencyFilter } from "../utils";
+import { ItemType } from "./selectors";
 
 const isLoading = handleActions(
   {

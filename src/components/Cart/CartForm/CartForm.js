@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Input from "../../Input";
 import { checkEmail } from "../../../modules/utils";
 
@@ -57,7 +58,8 @@ class CartForm extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchForm();
+    const { stateFields, fetchForm } = this.props;
+    if (stateFields.length === 0) fetchForm();
   }
 
   changeHandler = event => {
@@ -66,16 +68,14 @@ class CartForm extends Component {
       target: { id, value }
     } = event;
     const fields = [...this.state.fields];
-    fields.map(el => (el.error = ""));
     fields.find(field => field.id === id).value = value;
+    fields.find(field => field.id === id).error = "";
     this.setState(fields);
+    this.changeStore({ id, value });
   };
 
-  blurHandler = event => {
+  changeStore = ({ id, value }) => {
     const { stateFields, changeField, addField } = this.props;
-    const {
-      target: { id, value }
-    } = event;
     stateFields.find(el => el.id === id)
       ? changeField({ id, value })
       : addField({ id, value });
@@ -85,20 +85,16 @@ class CartForm extends Component {
     event.preventDefault();
     const fields = [...this.state.fields];
 
-    fields.map(item => {
-      const errorText = !item.validator(item.value)
-        ? item.errorInvalid
-        : item.value.length === 0
-        ? item.errorEmpty
-        : "";
-
-      return {
-        ...item,
-        error: errorText
-      };
+    fields.forEach(item => {
+      item.error =
+        item.value.length === 0
+          ? item.errorEmpty
+          : !item.validator(item.value)
+          ? item.errorInvalid
+          : "";
     });
 
-    const valid = fields.filter(item => item.error.length === 0).length === 0;
+    const valid = fields.filter(item => !item.error).length === fields.length;
 
     this.setState(valid ? { isSubmited: true } : fields);
   };
@@ -119,7 +115,6 @@ class CartForm extends Component {
               value={value}
               error={error}
               onChange={this.changeHandler}
-              onBlur={this.blurHandler}
               phone={id === "phone"}
             />
           ))}
@@ -129,5 +124,12 @@ class CartForm extends Component {
     );
   }
 }
+
+CartForm.propTypes = {
+  addField: PropTypes.func.isRequired,
+  changeField: PropTypes.func.isRequired,
+  fetchForm: PropTypes.func.isRequired,
+  stateFields: PropTypes.array.isRequired
+};
 
 export default CartForm;

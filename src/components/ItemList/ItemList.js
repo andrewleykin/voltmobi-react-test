@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ItemListItem from "./ItemListItem";
 import "./ItemList.css";
 
@@ -12,6 +13,10 @@ const ItemList = ({ items }) => {
       ))}
     </div>
   );
+};
+
+ItemList.propTypes = {
+  items: PropTypes.array.isRequired
 };
 
 export default ItemList;

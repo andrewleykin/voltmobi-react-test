@@ -1,18 +1,27 @@
 import { createSelector } from "reselect";
 import { getActiveCategories } from "../Categories";
 import { currencyFilter } from "../utils";
+import { InitialState } from "../index";
+import { ItemType } from "../Items";
 
-export const getIsLoadingCart = state => state.cart.isLoading;
+export type CartStateType = {
+  isLoaded: Boolean;
+  isLoading: Boolean;
+  data: Array<ItemType>;
+};
 
-export const getCart = state => state.cart.data;
+export const getIsLoadingCart = (state: InitialState) => state.cart.isLoading;
+export const getIsLoadedCart = (state: InitialState) => state.cart.isLoaded;
 
-export const getItemInCart = (state, id) => {
+export const getCart = (state: InitialState) => state.cart.data;
+
+export const getItemInCart = (state: InitialState, id: number) => {
   return createSelector(getCart, cartData =>
     cartData.find(item => item.id === id)
   )(state);
 };
 
-export const getCartLength = state => getCart(state).length;
+export const getCartLength = (state: InitialState) => getCart(state).length;
 
 export const getCartTotalSum = createSelector(getCart, cartData => {
   return currencyFilter(cartData.reduce((acc, item) => acc + item.cost, 0));

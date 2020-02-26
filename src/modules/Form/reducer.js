@@ -1,6 +1,11 @@
 import { combineReducers } from "redux";
 import { handleActions } from "redux-actions";
-import { fetchRequest, fetchSuccess, addField, changeField } from "./actions";
+import {
+  fetchRequest,
+  fetchSuccess,
+  addFieldActions,
+  changeFieldActions
+} from "./actions";
 
 const isLoading = handleActions(
   {
@@ -14,8 +19,8 @@ const data = handleActions(
   {
     [fetchRequest]: () => [],
     [fetchSuccess]: (_state, action) => action.payload,
-    [addField]: (_state, action) => [..._state, action.payload],
-    [changeField]: (_state, action) => {
+    [addFieldActions]: (_state, action) => [..._state, action.payload],
+    [changeFieldActions]: (_state, action) => {
       return [
         ..._state.map(item =>
           item.id === action.payload.id

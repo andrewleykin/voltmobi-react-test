@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ActionButton from "../ActionButton";
 import ItemWrap from "./ItemWrap";
 
@@ -22,6 +23,11 @@ const Item = ({ categories, itemInfo }) => {
       <ActionButton item={itemInfo} />
     </ItemWrap>
   );
+};
+
+Item.propTypes = {
+  categories: PropTypes.array.isRequired,
+  itemInfo: PropTypes.object.isRequired
 };
 
 export default Item;

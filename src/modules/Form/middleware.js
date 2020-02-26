@@ -1,8 +1,8 @@
 import {
   fetchRequest,
   fetchSuccess,
-  changeField as changeFieldActions,
-  addField as addFieldActions
+  changeFieldActions,
+  addFieldActions
 } from "./actions";
 import { save, load, FORM_LOCALSTORAGE_KEY } from "../localstorage";
 import { getForm } from "./selectors";

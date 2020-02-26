@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import SidebarClearButton from "./SidebarClearButton";
 import SidebarItem from "./SidebarItem";
 import "./Sidebar.css";
 
 class Sidebar extends Component {
   componentDidMount() {
-    this.props.fetchCategories();
-    this.clearActiveCategories();
+    const { categories, fetchCategories } = this.props;
+    if (categories.length === 0) fetchCategories();
   }
 
   setActiveCategories = event => {
@@ -40,5 +41,13 @@ class Sidebar extends Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  categories: PropTypes.array.isRequired,
+  activeCategories: PropTypes.string.isRequired,
+  setActive: PropTypes.func.isRequired,
+  clearActive: PropTypes.func.isRequired,
+  fetchCategories: PropTypes.func.isRequired
+};
 
 export default Sidebar;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import ActionButton from "../ActionButton";
 
@@ -13,6 +14,10 @@ const ItemListItem = ({ item }) => {
       <ActionButton item={item} />
     </div>
   );
+};
+
+ItemListItem.propTypes = {
+  item: PropTypes.object.isRequired
 };
 
 export default ItemListItem;

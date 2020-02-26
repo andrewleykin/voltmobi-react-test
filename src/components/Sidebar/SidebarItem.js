@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const SidebarItem = ({ item, setActiveCategories, activeCategories }) => {
   const { id, title } = item;
@@ -14,6 +15,12 @@ const SidebarItem = ({ item, setActiveCategories, activeCategories }) => {
       {title}
     </button>
   );
+};
+
+SidebarItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  setActiveCategories: PropTypes.func.isRequired,
+  activeCategories: PropTypes.string.isRequired
 };
 
 export default SidebarItem;

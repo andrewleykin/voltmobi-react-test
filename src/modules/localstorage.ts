@@ -1,4 +1,16 @@
-function load(localStorageKey: string) {
+import { ArrayItemType } from "./Items";
+import { ArrayFormItem } from "./Form";
+
+const CART_LOCALSTORAGE_KEY = "cart";
+const FORM_LOCALSTORAGE_KEY = "test-form";
+
+type localStorageKeyType =
+  | typeof CART_LOCALSTORAGE_KEY
+  | typeof FORM_LOCALSTORAGE_KEY;
+
+type dataSaveType = ArrayItemType | ArrayFormItem;
+
+function load(localStorageKey: localStorageKeyType) {
   const stringData: any = window.localStorage.getItem(localStorageKey);
   let data: any = null;
 
@@ -9,15 +21,12 @@ function load(localStorageKey: string) {
   return data;
 }
 
-function save(localStorageKey: string, data: any) {
+function save(localStorageKey: localStorageKeyType, data: dataSaveType) {
   window.localStorage.setItem(localStorageKey, JSON.stringify(data));
 }
 
-function clearLocal(localStorageKey: string) {
+function clearLocal(localStorageKey: localStorageKeyType) {
   window.localStorage.removeItem(localStorageKey);
 }
-
-const CART_LOCALSTORAGE_KEY: string = "cart";
-const FORM_LOCALSTORAGE_KEY: string = "test-form";
 
 export { load, save, clearLocal, CART_LOCALSTORAGE_KEY, FORM_LOCALSTORAGE_KEY };

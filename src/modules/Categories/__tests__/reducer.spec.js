@@ -36,11 +36,11 @@ describe("categories reducer", () => {
     const initialState = {
       isLoading: false,
       data: [1, 2, 3],
-      active: ""
+      active: null
     };
-    expect(categories(initialState, setActive("1"))).toEqual({
+    expect(categories(initialState, setActive(1))).toEqual({
       ...initialState,
-      active: "1"
+      active: 1
     });
   });
 
@@ -48,11 +48,11 @@ describe("categories reducer", () => {
     const initialState = {
       isLoading: false,
       data: [1, 2, 3],
-      active: "1"
+      active: 1
     };
     expect(categories(initialState, clearActive())).toEqual({
       ...initialState,
-      active: ""
+      active: null
     });
   });
 });

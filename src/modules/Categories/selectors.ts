@@ -1,16 +1,7 @@
 import { InitialState } from "../index";
+import { ArrayCategoriesItemType } from "./types";
 
-export type CategoriesItemType = {
-  id: Number;
-  title: String;
-};
-
-export type CategoriesStateType = {
-  isLoading: boolean;
-  data: Array<CategoriesItemType>;
-  active: number;
-};
-
-export const getCategories = (state: InitialState) => state.categories.data;
-export const getActiveCategories = (state: InitialState) =>
+export const getCategories = (state: InitialState): ArrayCategoriesItemType =>
+  state.categories.data;
+export const getActiveCategories = (state: InitialState): number =>
   state.categories.active;

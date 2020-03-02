@@ -8,7 +8,7 @@ import ItemEmpty from "./ItemEmpty";
 
 const mapStateToProps = (state, ownProps) => ({
   items: getItems(state),
-  itemInfo: getItemById(state, ownProps.match.params.id),
+  itemInfo: getItemById(state, +ownProps.match.params.id),
   categories: getCategories(state)
 });
 
